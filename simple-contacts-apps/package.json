@@ -1,0 +1,25 @@
+{
+  "name": "simple-contacts-apps",
+  "version": "1.0.0",
+  "description": "simple contacts app to implement my understanding about node js",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zalbaq/NodeJS.git"
+  },
+  "author": "Ihza Nurkhafidh Al-Baihaqi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zalbaq/NodeJS/issues"
+  },
+  "homepage": "https://github.com/Zalbaq/NodeJS#readme",
+  "dependencies": {
+    "validator": "^13.11.0",
+    "yargs": "^17.7.2"
+  }
+}
