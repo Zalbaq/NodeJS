@@ -17,7 +17,7 @@ const checkDir = (dirPath) => {
   });
 };
 
-const checkFilePath = (filePath) => {
+const checkFile = (filePath) => {
   new Promise((resolve) => {
     if (!fs.existsSync(filePath))
       resolve(fs.writeFileSync(filePath, "[]", "utf-8"));
@@ -29,13 +29,16 @@ const checkPath = () => {
   const filePath = "data/contacts.json";
 
   checkDir(dirPath);
-  checkFilePath(filePath);
+  checkFile(filePath);
 };
 
-const addData = (data) => {
+const loadContact = () => {
   const dataBuffer = fs.readFileSync("data/contacts.json", "utf-8");
   const contactsJSON = JSON.parse(dataBuffer);
-
+  return contactsJSON;
+};
+const pushData = (data) => {
+  const contactsJSON = loadContact();
   const isDuplicate = contactsJSON.find(
     (contact) => contact.name === data.name
   );
@@ -43,13 +46,16 @@ const addData = (data) => {
   if (isDuplicate) {
     console.log("Nama sudah terdaftar!!");
     rl.close();
-    return false;
+  } else {
+    contactsJSON.push(data);
+    fs.writeFileSync(
+      "data/contacts.json",
+      JSON.stringify(contactsJSON),
+      "utf-8"
+    );
+    console.log("Terimakasih telah memasukkan data anda");
   }
-
-  contactsJSON.push(data);
-  fs.writeFileSync("data/contacts.json", JSON.stringify(contactsJSON), "utf-8");
-
   rl.close();
 };
 
-export { addData, question, checkPath };
+export { pushData, question, checkPath };
