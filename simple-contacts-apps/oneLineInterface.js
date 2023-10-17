@@ -2,7 +2,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { pushData, listData } from "./contacts.js";
 
-const cli = yargs(hideBin(process.argv));
+const cli = yargs(hideBin(process.argv)).help();
 
 const addComand = () => {
   return {
@@ -54,7 +54,13 @@ const listCommand = () => {
 
 const setupComand = async () => {
   return new Promise((resolve) => {
-    resolve(cli.command(addComand()).command(listCommand()).parse());
+    resolve(
+      cli
+        .command(addComand())
+        .command(listCommand()).help().parse()
+    );
   });
 };
-export const setupOneLine = { setupComand };
+
+setupComand()
+export { setupComand };
