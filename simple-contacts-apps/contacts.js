@@ -38,6 +38,7 @@ const loadContact = () => {
   const contactsJSON = JSON.parse(dataBuffer);
   return contactsJSON;
 };
+
 const pushData = (data) => {
   const contactsJSON = loadContact();
   const isDuplicate = contactsJSON.find(
@@ -46,7 +47,6 @@ const pushData = (data) => {
 
   if (isDuplicate) {
     console.log("Nama sudah terdaftar!!");
-    rl.close();
   } else {
     contactsJSON.push(data);
     fs.writeFileSync(
@@ -58,6 +58,7 @@ const pushData = (data) => {
   }
   rl.close();
 };
+
 const listData = () => {
   const contacts = loadContact();
   contacts.forEach((contact, i) => {
@@ -67,6 +68,7 @@ const listData = () => {
       }`
     );
   });
+  rl.close()
 };
 
 export { pushData, question, checkPath, listData };
